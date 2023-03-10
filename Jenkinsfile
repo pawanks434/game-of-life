@@ -1,9 +1,7 @@
 pipeline {
-    agent {
-       label 'NODE1-JDK8-11-MVN'
-       }
+    agent any
     stages {
-        stage ('vcs')
+        stage ('vcs') {
             steps {
                 git url: 'https://github.com/pawanks434/game-of-life.git'
                 branches: 'declarative'
@@ -17,10 +15,11 @@ pipeline {
                 sh 'mvn package'
             }
         }
-        stage ('post build'){
+        stage ('post build') {
             steps {
                 archiveArtifacts artifacts: '**/target/gameoflife.war',
                 junit testResults: '**/surefire-reports/TEST-*.xml'
             }
+            
         }
 }
