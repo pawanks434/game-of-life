@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    triggers {cron ('H/15 * * * *')}
+    triggers { pollSCM ('H/15 * * * *') }  
     stages {
         stage ('vcs') {
             steps {
