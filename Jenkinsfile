@@ -1,6 +1,7 @@
 pipeline {
     agent any
     triggers { pollSCM ('H/15 * * * *') }  
+    parameters { string(name: 'MAVEN_GOA:', defaultValue: 'package', description: 'MVN_GOAL') }
     stages {
         stage ('vcs') {
             steps {
@@ -13,7 +14,7 @@ pipeline {
                 jdk 'JDK8_UBUNTU'
             }
             steps {
-                sh 'mvn clean package'
+                sh "mvn ${params.MAVEN_GOAL}"
             }
         }
         stage ('post build') {
