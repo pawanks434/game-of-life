@@ -1,6 +1,5 @@
 pipeline {
-    agent any
-    triggers { pollSCM ('H/15 * * * *') }  
+    agent none
     parameters { choice(name: 'MAVEN_GOAL', choices: ['package', 'clean', 'compile', 'install', 'clean package', 'clean test'], description: 'MVN-GL') }
     stages {
         stage ('vcs') {
