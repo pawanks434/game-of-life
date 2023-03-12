@@ -1,5 +1,5 @@
 pipeline {
-    parameters { choice(name: 'MAVEN_GOAL', choices: ['package', 'clean', 'compile', 'install', 'clean package', 'clean test'], description: 'MVN-GL') }
+    agent none
     stages {
         stage ('vcs') {
             steps {
@@ -9,7 +9,7 @@ pipeline {
         }
         stage ('package') {
             steps {
-                sh "mvn ${params.MAVEN_GOAL}"
+                sh 'mvn package'
             }
         }
         stage ('copy build') {
