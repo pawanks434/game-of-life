@@ -1,5 +1,4 @@
 pipeline {
-    agent none
     parameters { choice(name: 'MAVEN_GOAL', choices: ['package', 'clean', 'compile', 'install', 'clean package', 'clean test'], description: 'MVN-GL') }
     stages {
         stage ('vcs') {
