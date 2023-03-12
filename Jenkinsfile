@@ -11,14 +11,14 @@ pipeline {
         }
         stage ('package') {
             steps {
-                sh 'export PATH="/usr/lib/jvm/java-8-openjdk-amd64/bin:$PATH" && "mvn ${params.MAVEN_GOAL}"'
+                sh "mvn ${params.MAVEN_GOAL}"
             }
         }
         stage ('copy build') {
             steps {
             sh  'FOLDER="/tmp/${JOB_NAME}/${BUILD_ID}" && \
-            mkdir -p "${FOLDER}" && \
-            cp "./gameoflife-web/target/gameoflife.war" ${FOLDER}'
+                 mkdir -p "${FOLDER}" && \
+                 cp "./gameoflife-web/target/gameoflife.war" ${FOLDER}'
             }
         }
         stage ('post build') {
