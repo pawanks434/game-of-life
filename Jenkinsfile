@@ -1,7 +1,7 @@
 pipeline {
     agent any
     triggers { pollSCM ('H/15 * * * *') }  
-    parameters { string(name: 'MAVEN_GOAL', defaultValue: 'package', description: 'MVN_GOAL') }
+    parameters { choice(name: 'MAVEN_GOAL', choices: ['package', 'clean', 'compile', 'install', 'clean package', 'clean test'], description: 'MVN-GL') }
     stages {
         stage ('vcs') {
             steps {
@@ -15,6 +15,16 @@ pipeline {
             }
             steps {
                 sh "mvn ${params.MAVEN_GOAL}"
+            }
+        }
+        stage ('copy build') {
+            steps {
+
+                       sh 'export PATH="/usr/lib/jvm/java-8-openjdk-amd64/bin:$PATH" &&
+                           mvn clean package &&
+                           FOLDER="/tmp/${JOB_NAME}/${BUILD_ID}" &&
+                           mkdir -p "${FOLDER}" &&
+                           cp "./gameoflife-web/target/gameoflife.war" ${FOLDER}'
             }
         }
         stage ('post build') {
