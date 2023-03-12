@@ -20,11 +20,11 @@ pipeline {
         stage ('copy build') {
             steps {
 
-                       sh 'export PATH="/usr/lib/jvm/java-8-openjdk-amd64/bin:$PATH" &&
-                           mvn clean package &&
-                           FOLDER="/tmp/${JOB_NAME}/${BUILD_ID}" &&
-                           mkdir -p "${FOLDER}" &&
-                           cp "./gameoflife-web/target/gameoflife.war" ${FOLDER}'
+                       sh 'export PATH="/usr/lib/jvm/java-8-openjdk-amd64/bin:$PATH"' &&
+                           'mvn clean package' &&
+                           'FOLDER="/tmp/${JOB_NAME}/${BUILD_ID}"' &&
+                           'mkdir -p "${FOLDER}"' &&
+                           'cp "./gameoflife-web/target/gameoflife.war" ${FOLDER}'
             }
         }
         stage ('post build') {
