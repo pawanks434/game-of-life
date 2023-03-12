@@ -11,7 +11,7 @@ pipeline {
         }
         stage ('package') {
             steps {
-                sh export PATH="/usr/lib/jvm/java-8-openjdk-amd64/bin:${PATH}" && "mvn ${params.MAVEN_GOAL}"
+                sh "mvn ${params.MAVEN_GOAL}"
             }
         }
         stage ('copy build') {
