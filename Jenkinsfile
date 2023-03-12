@@ -16,8 +16,8 @@ pipeline {
         }
         stage ('copy build') {
             steps {
-            sh  'FOLDER="/tmp/${JOB_NAME}/${BUILD_ID}" &&
-            mkdir -p "${FOLDER}" &&
+            sh  'FOLDER="/tmp/${JOB_NAME}/${BUILD_ID}" && \
+            mkdir -p "${FOLDER}" && \
             cp "./gameoflife-web/target/gameoflife.war" ${FOLDER}'
             }
         }
