@@ -12,7 +12,7 @@ pipeline {
                    jdk 'JDK8_UBUNTU'
                 }
             steps {
-                sh 'mvn package'
+                sh 'mvn testing'
             }
         }
         stage ('post build') {
