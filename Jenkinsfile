@@ -15,13 +15,6 @@ pipeline {
                 sh 'mvn package'
             }
         }
-        stage ('copy build') {
-            steps {
-            sh  'FOLDER="/tmp/${JOB_NAME}/${BUILD_ID}" && \
-                 mkdir -p "${FOLDER}" && \
-                 cp "./gameoflife-web/target/gameoflife.war" ${FOLDER}'
-            }
-        }
         stage ('post build') {
             steps {
                 archiveArtifacts artifacts: '**/target/gameoflife.war'
@@ -29,4 +22,12 @@ pipeline {
             }
         }
    }
+   post {
+     sucess {
+        mail subject: "Jenkins build of ${JOB_NAME} with biuld id ${BUILD_ID} is success",
+             body: "for more info refer the build URL ${BUILD_URL}",
+             from: 'pawanks434@gmail.com',
+             to: 'team-all-qt@qt.com'   
+     }
+   }              
 }
