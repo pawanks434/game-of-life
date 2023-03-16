@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    trigger { pollSCM ('30 9 * * 4') }
+    stages {
+        stage('vcs') {
+            steps {
+                git url: 'https://github.com/pawanks434/game-of-life.git',
+                branch: 'uat'
+            }
+        }
+        stage(package) {
+                tools {
+                    jdk 'JDK8_UBUNTU'
+                }
+                 steps {
+                    sh  'mvn package'
+                 }   
+        }
+    }  
+}
